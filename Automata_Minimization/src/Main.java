@@ -5,6 +5,8 @@ public class Main {
 		// TODO Auto-generated method stub
 		Dfa df=new Dfa();
 		df.init();
+		df.minimize();
+		
 	}
 
 }

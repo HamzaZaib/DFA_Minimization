@@ -28,16 +28,30 @@ public class State {
 		this.outflows=outflows;
 		this.Type=type;
 	}
-	public boolean equals(State state, String initial, String[] alphabets) {
+	public boolean equals(State state, String initial, String[] alphabets, int max) {
+		if(initial.length()==max)
+			return false;
+		if((state.Type==StateType.Both || state.Type==StateType.Final)^(this.Type==StateType.Both || this.Type==StateType.Final))
+			return false;
 		for(int i=0;i<alphabets.length;i++){
-			String temp=initial+alphabets[i];
-			if(outflows.get(alphabets[i]).equals(state.outflows.get(alphabets[i]))){
-				
-			}
-			else{
-				
+			State resultState=outflows.get(alphabets[i]),resultState1=state.outflows.get(alphabets[i]);
+			
+			if(resultState==null^resultState1==null)
+				return false;
+			else if(resultState!=null&&resultState1!=null){
+				if(!resultState.equals(resultState1)){
+					if(!resultState.equals(resultState1,initial+alphabets[i],alphabets,max)){
+						return false;
+					}
+				}
 			}
 		}
+		return true;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if(this.name.equals(((State)obj).name))
+			return true;
 		return false;
 	}
 	
