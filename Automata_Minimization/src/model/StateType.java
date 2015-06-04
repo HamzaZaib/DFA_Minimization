@@ -1,3 +1,4 @@
+package model;
 
 public enum StateType {
 	Start("starting"),Final("Accepting State"),Both("Starting And Accepting State"),Neither("Normal");
